@@ -59,6 +59,7 @@ public interface Iterator<E> {
      *
      * @return {@code true} if the iteration has more elements
      */
+    // 是否有更多的元素
     boolean hasNext();
 
     /**
@@ -67,6 +68,7 @@ public interface Iterator<E> {
      * @return the next element in the iteration
      * @throws NoSuchElementException if the iteration has no more elements
      */
+    // 获取迭代中的下一个元素
     E next();
 
     /**
@@ -89,6 +91,7 @@ public interface Iterator<E> {
      *         been called after the last call to the {@code next}
      *         method
      */
+    // 移除当前迭代的元素
     default void remove() {
         throw new UnsupportedOperationException("remove");
     }
@@ -110,6 +113,7 @@ public interface Iterator<E> {
      * @throws NullPointerException if the specified action is null
      * @since 1.8
      */
+    // 为剩余的元素执行流式迭代操作
     default void forEachRemaining(Consumer<? super E> action) {
         Objects.requireNonNull(action);
         while (hasNext())

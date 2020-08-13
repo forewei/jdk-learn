@@ -367,6 +367,7 @@ public interface Spliterator<T> {
      * @return a {@code Spliterator} covering some portion of the
      * elements, or {@code null} if this spliterator cannot be split
      */
+    // 把目标分割成两半
     Spliterator<T> trySplit();
 
     /**

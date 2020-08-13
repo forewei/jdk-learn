@@ -48,6 +48,8 @@ public interface Iterable<T> {
      *
      * @return an Iterator.
      */
+
+    // 返回泛型的迭代器
     Iterator<T> iterator();
 
     /**
@@ -69,6 +71,7 @@ public interface Iterable<T> {
      * @throws NullPointerException if the specified action is null
      * @since 1.8
      */
+    // 流式遍历。遍历每个元素，并对其执行相应的择取操作
     default void forEach(Consumer<? super T> action) {
         Objects.requireNonNull(action);
         for (T t : this) {
@@ -97,6 +100,7 @@ public interface Iterable<T> {
      * {@code Iterable}.
      * @since 1.8
      */
+    //  将普通迭代器转换为可分割迭代器，通常用于流式操作
     default Spliterator<T> spliterator() {
         return Spliterators.spliteratorUnknownSize(iterator(), 0);
     }

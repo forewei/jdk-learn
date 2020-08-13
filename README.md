@@ -23,6 +23,8 @@
      
  [Oracle JDK 全版本下载地址](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
  
+ [Java8 在线文档](https://docs.oracle.com/javase/8/docs/api/)
+ 
  ## 脚注
      
  Commit信息中的`emoji`参考来源：
@@ -30,6 +32,11 @@
  * [Full Emoji List](https://unicode.org/emoji/charts/full-emoji-list.html)   
     
  * [gitmoji](https://gitmoji.carloscuesta.me/)    
+ 
+ ## 已阅读代码清单
+ 
+ ####[已阅代码清单_按功能排序](已阅代码清单_按功能排序.md)
+ 
  
  ## todo 
  jdk 源码编译步骤 
