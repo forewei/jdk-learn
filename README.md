@@ -19,10 +19,9 @@
  
  ## 相关链接
      
- [Oracle JDK](https://www.oracle.com/technetwork/java/javase/archive-139210.html)    
+ [Open JDK](http://jdk.java.net/archive)
      
- [Open JDK](http://jdk.java.net/archive)    
- 
+ [Oracle JDK 全版本下载地址](https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html)
  
  ## 脚注
      
