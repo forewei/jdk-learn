@@ -69,6 +69,7 @@ public interface ListIterator<E> extends Iterator<E> {
      * @return {@code true} if the list iterator has more elements when
      *         traversing the list in the forward direction
      */
+    // 是否有更多元素
     boolean hasNext();
 
     /**
@@ -81,6 +82,7 @@ public interface ListIterator<E> extends Iterator<E> {
      * @return the next element in the list
      * @throws NoSuchElementException if the iteration has no next element
      */
+    // 返回迭代的下一个元素
     E next();
 
     /**
@@ -92,6 +94,7 @@ public interface ListIterator<E> extends Iterator<E> {
      * @return {@code true} if the list iterator has more elements when
      *         traversing the list in the reverse direction
      */
+    // 是否有前一个元素（可理解为从后往前遍历）
     boolean hasPrevious();
 
     /**
@@ -106,6 +109,7 @@ public interface ListIterator<E> extends Iterator<E> {
      * @throws NoSuchElementException if the iteration has no previous
      *         element
      */
+    // 获取前一个元素
     E previous();
 
     /**
@@ -117,6 +121,8 @@ public interface ListIterator<E> extends Iterator<E> {
      *         subsequent call to {@code next}, or list size if the list
      *         iterator is at the end of the list
      */
+    // 返回对 next() 的后续调用将返回的元素的索引
+    // 如果列表迭代器位于列表的末尾，则返回列表大小
     int nextIndex();
 
     /**
@@ -128,6 +134,8 @@ public interface ListIterator<E> extends Iterator<E> {
      *         subsequent call to {@code previous}, or -1 if the list
      *         iterator is at the beginning of the list
      */
+    // 返回对 previous() 的后续调用将返回的元素的索引
+    // 如果列表迭代器位于列表的开头，则返回 -1
     int previousIndex();
 
 
@@ -147,6 +155,8 @@ public interface ListIterator<E> extends Iterator<E> {
      *         {@code add} have been called after the last call to
      *         {@code next} or {@code previous}
      */
+    // 从底层集合中删除此迭代器返回的最后一个元素（可选操作）
+    // 每次调用 next() 时只能调用一次此该方法
     void remove();
 
     /**
@@ -169,6 +179,7 @@ public interface ListIterator<E> extends Iterator<E> {
      *         {@code add} have been called after the last call to
      *         {@code next} or {@code previous}
      */
+    // 用指定的元素替换 next() 或 previous() 返回的最后一个元素
     void set(E e);
 
     /**
@@ -191,5 +202,6 @@ public interface ListIterator<E> extends Iterator<E> {
      * @throws IllegalArgumentException if some aspect of this element
      *         prevents it from being added to this list
      */
+    // 插入指定元素到列表中
     void add(E e);
 }

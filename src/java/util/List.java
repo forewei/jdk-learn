@@ -333,6 +333,7 @@ public interface List<E> extends Collection<E> {
      * @throws IndexOutOfBoundsException if the index is out of range
      *         (<tt>index &lt; 0 || index &gt; size()</tt>)
      */
+    // 将一个集合的所有元素添加到当前集合的指定位置
     boolean addAll(int index, Collection<? extends E> c);
 
     /**
@@ -406,6 +407,7 @@ public interface List<E> extends Collection<E> {
      *         (<a href="Collection.html#optional-restrictions">optional</a>)
      * @since 1.8
      */
+    // 用指定的运算结果替代集合中的所有元素
     default void replaceAll(UnaryOperator<E> operator) {
         Objects.requireNonNull(operator);
         final ListIterator<E> li = this.listIterator();
@@ -472,6 +474,7 @@ public interface List<E> extends Collection<E> {
      *         contract
      * @since 1.8
      */
+    // 用指定的 Comporator 对集合元素进行排序
     @SuppressWarnings({"unchecked", "rawtypes"})
     default void sort(Comparator<? super E> c) {
         Object[] a = this.toArray();
@@ -541,6 +544,7 @@ public interface List<E> extends Collection<E> {
      * @throws IndexOutOfBoundsException if the index is out of range
      *         (<tt>index &lt; 0 || index &gt;= size()</tt>)
      */
+    // 获取指定位置的元素
     E get(int index);
 
     /**
@@ -561,6 +565,7 @@ public interface List<E> extends Collection<E> {
      * @throws IndexOutOfBoundsException if the index is out of range
      *         (<tt>index &lt; 0 || index &gt;= size()</tt>)
      */
+    // 将某个位置的元素替换为指定元素
     E set(int index, E element);
 
     /**
@@ -582,6 +587,7 @@ public interface List<E> extends Collection<E> {
      * @throws IndexOutOfBoundsException if the index is out of range
      *         (<tt>index &lt; 0 || index &gt; size()</tt>)
      */
+    //  将指定元素添加到集合的指定位置
     void add(int index, E element);
 
     /**
@@ -597,6 +603,7 @@ public interface List<E> extends Collection<E> {
      * @throws IndexOutOfBoundsException if the index is out of range
      *         (<tt>index &lt; 0 || index &gt;= size()</tt>)
      */
+    // 移除指定位置的元素
     E remove(int index);
 
 
@@ -619,6 +626,7 @@ public interface List<E> extends Collection<E> {
      *         list does not permit null elements
      *         (<a href="Collection.html#optional-restrictions">optional</a>)
      */
+    // 某个元素在集合中（第一次出现）的位置
     int indexOf(Object o);
 
     /**
@@ -638,6 +646,7 @@ public interface List<E> extends Collection<E> {
      *         list does not permit null elements
      *         (<a href="Collection.html#optional-restrictions">optional</a>)
      */
+    // 某个元素在集合中最后一次出现的位置
     int lastIndexOf(Object o);
 
 
@@ -650,6 +659,8 @@ public interface List<E> extends Collection<E> {
      * @return a list iterator over the elements in this list (in proper
      *         sequence)
      */
+    // 返回元素的列表迭代器
+    // 相当于 list.listIterator(0)
     ListIterator<E> listIterator();
 
     /**
@@ -667,6 +678,7 @@ public interface List<E> extends Collection<E> {
      * @throws IndexOutOfBoundsException if the index is out of range
      *         ({@code index < 0 || index > size()})
      */
+    //  返回元素的 listIterator（指定起始位置）
     ListIterator<E> listIterator(int index);
 
     // View
@@ -705,6 +717,7 @@ public interface List<E> extends Collection<E> {
      *         (<tt>fromIndex &lt; 0 || toIndex &gt; size ||
      *         fromIndex &gt; toIndex</tt>)
      */
+    //  获取集合的子集
     List<E> subList(int fromIndex, int toIndex);
 
     /**
