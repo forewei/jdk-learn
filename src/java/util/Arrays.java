@@ -68,6 +68,44 @@ import java.util.stream.StreamSupport;
  * @author John Rose
  * @since  1.2
  */
+/*
+ * 用来操作各类型数组的工具类，包含的方法类别如下：
+ *
+ * 【Array转List】asList
+ *
+ * 【流】　　　stream
+ * 【流迭代器】spliterator
+ *
+ * 【排序】　　 sort
+ * 【并行排序】 parallelSort  思想是把一个需要排序的数组,分成多段进行排序,最后在合并。只适量级比较大的数据 当数组小于等于8192时,或者处理器核心为1
+ *                          使用的sort排序 否则使用并行品排序
+ *
+ * 【二分查找】binarySearch（要求数组元素有序）
+ *
+ * 【填充】fill
+ *
+ * 【复制】　　copyOf
+ * 【范围复制】copyOfRange
+ *
+ * 【判等】　　 equals
+ * 【深度判等】 deepEquals 用于多维数组的判等，类似于{{1,2,3},{1,2,3}}
+ *
+ * 【比较】　　　compare（返回值为-1、0、1，分别代表a<b、a==b、a>b）
+ * 【无符号比较】compareUnsigned
+ *
+ * 【失配比较】mismatch（返回首个失配元素的下标，返回-1表示相等）
+ *
+ * 【批量设置】　　setAll（设置的值与下标相关）
+ * 【并行批量设置】parallelSetAll（设置的值与下标相关）
+ *
+ * 【哈希】　　hashCode
+ * 【深度哈希】deepHashCode
+ *
+ * 【字符串化】　　toString
+ * 【深度字符串化】deepToString
+ *
+ * 【并行前缀计算】parallelPrefix
+ */
 public class Arrays {
 
     /**
@@ -76,6 +114,7 @@ public class Arrays {
      * smaller sizes typically results in memory contention across
      * tasks that makes parallel speedups unlikely.
      */
+    // 并行排序阙值。当待排序元素小于这个值时，不使用并行排序
     private static final int MIN_ARRAY_SORT_GRAN = 1 << 13;
 
     // Suppresses default constructor, ensuring non-instantiability.
