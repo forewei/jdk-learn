@@ -103,7 +103,7 @@ import sun.misc.SharedSecrets;
  * @see     Vector
  * @since   1.2
  */
-
+// 顺序表：线性表的顺序存储结构，内部使用数组实现，非线程安全
 public class ArrayList<E> extends AbstractList<E>
         implements List<E>, RandomAccess, Cloneable, java.io.Serializable
 {
@@ -112,11 +112,13 @@ public class ArrayList<E> extends AbstractList<E>
     /**
      * Default initial capacity.
      */
+    // 初始容量大小
     private static final int DEFAULT_CAPACITY = 10;
 
     /**
      * Shared empty array instance used for empty instances.
      */
+    // 空数组实例
     private static final Object[] EMPTY_ELEMENTDATA = {};
 
     /**
@@ -132,6 +134,7 @@ public class ArrayList<E> extends AbstractList<E>
      * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA
      * will be expanded to DEFAULT_CAPACITY when the first element is added.
      */
+    // 存储当前顺序表的元素
     transient Object[] elementData; // non-private to simplify nested class access
 
     /**
@@ -139,6 +142,7 @@ public class ArrayList<E> extends AbstractList<E>
      *
      * @serial
      */
+    // 元素数量
     private int size;
 
     /**
@@ -148,6 +152,7 @@ public class ArrayList<E> extends AbstractList<E>
      * @throws IllegalArgumentException if the specified initial capacity
      *         is negative
      */
+    /*▼ 构造器 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     public ArrayList(int initialCapacity) {
         if (initialCapacity > 0) {
             this.elementData = new Object[initialCapacity];
@@ -162,6 +167,7 @@ public class ArrayList<E> extends AbstractList<E>
     /**
      * Constructs an empty list with an initial capacity of ten.
      */
+    // 无参构造
     public ArrayList() {
         this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
     }
@@ -185,12 +191,14 @@ public class ArrayList<E> extends AbstractList<E>
             this.elementData = EMPTY_ELEMENTDATA;
         }
     }
+    /*▲ 构造器 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
     /**
      * Trims the capacity of this <tt>ArrayList</tt> instance to be the
      * list's current size.  An application can use this operation to minimize
      * the storage of an <tt>ArrayList</tt> instance.
      */
+    // 调整集合的大小为最小   内存紧张可以考虑使用
     public void trimToSize() {
         modCount++;
         if (size < elementData.length) {
@@ -207,6 +215,7 @@ public class ArrayList<E> extends AbstractList<E>
      *
      * @param   minCapacity   the desired minimum capacity
      */
+    // 最小扩容检测
     public void ensureCapacity(int minCapacity) {
         int minExpand = (elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA)
             // any size if not default element table
@@ -253,15 +262,17 @@ public class ArrayList<E> extends AbstractList<E>
      *
      * @param minCapacity the desired minimum capacity
      */
+    // 对当前顺序表扩容，minCapacity是申请的容量
     private void grow(int minCapacity) {
         // overflow-conscious code
-        int oldCapacity = elementData.length;
-        int newCapacity = oldCapacity + (oldCapacity >> 1);
-        if (newCapacity - minCapacity < 0)
-            newCapacity = minCapacity;
-        if (newCapacity - MAX_ARRAY_SIZE > 0)
-            newCapacity = hugeCapacity(minCapacity);
+        int oldCapacity = elementData.length;  // 旧容量
+        int newCapacity = oldCapacity + (oldCapacity >> 1); // 预期新容量(增加0.5倍)
+        if (newCapacity - minCapacity < 0)  // 如果预期新容量小于申请的容量
+            newCapacity = minCapacity; // 赋值申请容量给预期容量（取大值）
+        if (newCapacity - MAX_ARRAY_SIZE > 0) // 如果预期新容量溢出
+            newCapacity = hugeCapacity(minCapacity); // 越界判断 申请容量若大于int最大值-8则为int最大值,否则为int最大值-8
         // minCapacity is usually close to size, so this is a win:
+        // 复制元素
         elementData = Arrays.copyOf(elementData, newCapacity);
     }
 
@@ -458,8 +469,11 @@ public class ArrayList<E> extends AbstractList<E>
      * @param e element to be appended to this list
      * @return <tt>true</tt> (as specified by {@link Collection#add})
      */
+    // 添加元素
     public boolean add(E e) {
+        // 判断是否需要扩容
         ensureCapacityInternal(size + 1);  // Increments modCount!!
+        // 赋值操作
         elementData[size++] = e;
         return true;
     }
@@ -660,6 +674,7 @@ public class ArrayList<E> extends AbstractList<E>
     /**
      * A version of rangeCheck used by add and addAll.
      */
+    // 是否越界
     private void rangeCheckForAdd(int index) {
         if (index > size || index < 0)
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
@@ -689,6 +704,7 @@ public class ArrayList<E> extends AbstractList<E>
      *         or if the specified collection is null
      * @see Collection#contains(Object)
      */
+    // 匹配移除
     public boolean removeAll(Collection<?> c) {
         Objects.requireNonNull(c);
         return batchRemove(c, false);
@@ -710,6 +726,7 @@ public class ArrayList<E> extends AbstractList<E>
      *         or if the specified collection is null
      * @see Collection#contains(Object)
      */
+    // 不匹配移除
     public boolean retainAll(Collection<?> c) {
         Objects.requireNonNull(c);
         return batchRemove(c, true);
@@ -717,7 +734,7 @@ public class ArrayList<E> extends AbstractList<E>
 
     private boolean batchRemove(Collection<?> c, boolean complement) {
         final Object[] elementData = this.elementData;
-        int r = 0, w = 0;
+        int r = 0, w = 0;  // r:读指针  w:写指针
         boolean modified = false;
         try {
             for (; r < size; r++)
@@ -743,7 +760,7 @@ public class ArrayList<E> extends AbstractList<E>
         }
         return modified;
     }
-
+    /*▼ 序列化 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     /**
      * Save the state of the <tt>ArrayList</tt> instance to a stream (that
      * is, serialize it).
@@ -798,7 +815,7 @@ public class ArrayList<E> extends AbstractList<E>
             }
         }
     }
-
+    /*▲ 序列化 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     /**
      * Returns a list iterator over the elements in this list (in proper
      * sequence), starting at the specified position in the list.
